@@ -1,140 +1,207 @@
+
 :root {
-  --background: #0d1117;
-  --primary: #c9d1d9;
-  --secondary: #8b949e;
+  --bg-main: #0d1117;
+  --bg-card: #161b22;
+  --bg-soft: #1c2128;
+
+  --text-main: #e6edf3;
+  --text-muted: #9da7b3;
+
   --accent: #58a6ff;
-  --green: #39d353;
+  --accent-soft: rgba(88, 166, 255, 0.15);
+
   --border: #30363d;
 }
 
-/* ---------- Base ---------- */
+/* ===============================
+   RESET & BASE
+================================ */
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: 'Fira Code', 'Segoe UI', monospace;
-  background-color: var(--background);
-  color: var(--primary);
-  line-height: 1.6;
+  font-family: "Fira Code", "Segoe UI", monospace;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.7;
 }
 
-/* Hide cursor ONLY on large screens */
-@media (min-width: 1024px) {
-  body {
-    cursor: none;
-  }
+/* ===============================
+   LAYOUT
+================================ */
+header {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-/* ---------- Accent Utilities ---------- */
-.bg-accent { background-color: var(--accent); }
-.bg-green { background-color: var(--green); }
-
-/* ---------- Custom Cursor ---------- */
-#cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease, width 0.2s, height 0.2s;
-}
-
-#cursor-dot.hovered {
-  width: 28px;
-  height: 28px;
-  background-color: rgba(88, 166, 255, 0.15);
-}
-
-/* ---------- Hero ---------- */
-#hero-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 850px;
+section {
+  max-width: 1000px;
   margin: auto;
+  padding: 4.5rem 1.5rem;
+}
+
+.alt {
+  background-color: var(--bg-soft);
+}
+
+/* ===============================
+   HERO
+================================ */
+.hero-content {
+  max-width: 820px;
+  text-align: center;
   padding: 3rem;
-  background-color: rgba(13, 17, 23, 0.85);
-  backdrop-filter: blur(6px);
-  border-radius: 10px;
+  background-color: var(--bg-card);
+  border-radius: 14px;
   border: 1px solid var(--border);
 }
 
-/* ---------- Typography ---------- */
-h1, h2, h3 {
-  font-weight: 600;
-  letter-spacing: -0.5px;
+.hero-content h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
 }
 
-h2 {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+.hero-content p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin: auto;
 }
 
-/* ---------- Typewriter Cursor ---------- */
-.typewriter-cursor {
+/* ===============================
+   BUTTONS
+================================ */
+.buttons {
+  margin-top: 2rem;
+}
+
+.buttons a {
   display: inline-block;
-  width: 8px;
-  height: 1.2em;
+  margin: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.primary {
   background-color: var(--accent);
-  margin-left: 6px;
-  animation: blink 0.8s infinite;
+  color: #000;
+  font-weight: 600;
 }
 
-@keyframes blink {
-  50% { opacity: 0; }
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--accent-soft);
 }
 
-/* ---------- Skills ---------- */
-.skill-bar-inner {
-  transition: width 1.2s ease-in-out;
-}
-
-/* ---------- Project Cards ---------- */
-.project-card {
-  background-color: #161b22;
+.secondary {
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
+  color: var(--text-main);
+}
+
+.secondary:hover {
+  background-color: var(--bg-soft);
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+h2 {
+  font-size: 1.9rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 2rem;
+  color: var(--accent);
+}
+
+/* ===============================
+   SKILLS
+================================ */
+.skills {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.skills li {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===============================
+   PROJECTS
+================================ */
+.project-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.6rem;
+  margin-bottom: 1.8rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card h3 {
+  margin-top: 0;
+  color: var(--text-main);
+}
+
+.project-card p {
+  color: var(--text-muted);
 }
 
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 0 12px rgba(88, 166, 255, 0.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* ---------- Filters ---------- */
-.filter-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--secondary);
-  padding: 8px 16px;
-  border-radius: 6px;
-  transition: all 0.25s ease;
+/* ===============================
+   CONTACT
+================================ */
+#contact p {
+  text-align: center;
+  margin: 0.6rem 0;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-  background-color: var(--accent);
-  color: var(--background);
-  border-color: var(--accent);
+#contact a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
-/* ---------- Modal ---------- */
+#contact a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ===============================
+   MODAL
+================================ */
 #project-modal-overlay {
   position: fixed;
   inset: 0;
@@ -144,7 +211,7 @@ h2 {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: 0.3s ease;
+  transition: 0.3s;
   z-index: 1000;
 }
 
@@ -154,89 +221,52 @@ h2 {
 }
 
 #project-modal {
-  background-color: #161b22;
+  background-color: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 14px;
   width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow: hidden;
-  transform: scale(0.95);
-  transition: transform 0.3s ease;
+  max-width: 700px;
 }
 
-#project-modal-overlay.active #project-modal {
-  transform: scale(1);
+.modal-header {
+  padding: 1rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
 }
 
-/* ---------- Timeline ---------- */
-.timeline-item {
-  position: relative;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
+.modal-body {
+  padding: 1.5rem;
+  color: var(--text-muted);
 }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: 7px;
-  top: 0;
-  height: 100%;
-  width: 1px;
-  background-color: var(--border);
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 14px;
-  height: 14px;
-  background-color: var(--background);
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-}
-
-.timeline-item:hover .timeline-dot {
-  box-shadow: 0 0 8px var(--accent);
-}
-
-/* ---------- Forms ---------- */
-.form-input {
-  background-color: #010409;
-  border: 1px solid var(--border);
-  padding: 10px;
-  color: var(--primary);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
-}
-
-.submit-btn {
-  background-color: var(--accent);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: 0.3s ease;
-}
-
-.submit-btn:hover {
-  background-color: #79c0ff;
-  box-shadow: 0 0 10px #79c0ff;
-}
-
-/* ---------- Scroll Reveal ---------- */
+/* ===============================
+   REVEAL ANIMATION
+================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(25px);
   transition: 0.8s ease;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===============================
+   MOBILE FIXES
+================================ */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  section {
+    padding: 3rem 1.2rem;
+  }
 }
