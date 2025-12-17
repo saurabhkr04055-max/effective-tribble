@@ -1,3 +1,13 @@
+:root {
+  --background: #0d1117;
+  --primary: #c9d1d9;
+  --secondary: #8b949e;
+  --accent: #58a6ff;
+  --green: #39d353;
+  --border: #30363d;
+}
+
+/* ---------- Base ---------- */
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -5,112 +15,228 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  color: #2c2c2c;
+  font-family: 'Fira Code', 'Segoe UI', monospace;
+  background-color: var(--background);
+  color: var(--primary);
   line-height: 1.6;
-  background: #ffffff;
 }
 
-header {
-  text-align: center;
-  padding: 80px 20px;
-  background: #f7f7f7;
+/* Hide cursor ONLY on large screens */
+@media (min-width: 1024px) {
+  body {
+    cursor: none;
+  }
 }
 
-header h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
+/* ---------- Accent Utilities ---------- */
+.bg-accent { background-color: var(--accent); }
+.bg-green { background-color: var(--green); }
+
+/* ---------- Custom Cursor ---------- */
+#cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
 }
 
-.subtitle {
-  font-size: 20px;
-  color: #555;
+#cursor-dot.hovered {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(88, 166, 255, 0.15);
 }
 
-.tagline {
-  max-width: 600px;
-  margin: 15px auto 30px;
-  color: #666;
+/* ---------- Hero ---------- */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.buttons a {
-  display: inline-block;
-  margin: 8px;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: 0.3s;
-}
-
-.primary {
-  background: #222;
-  color: #fff;
-}
-
-.primary:hover {
-  background: #000;
-}
-
-.secondary {
-  border: 1px solid #222;
-  color: #222;
-}
-
-.secondary:hover {
-  background: #222;
-  color: #fff;
-}
-
-section {
-  max-width: 900px;
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
   margin: auto;
-  padding: 60px 20px;
+  padding: 3rem;
+  background-color: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
-section h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+/* ---------- Typography ---------- */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-section h3 {
-  margin-top: 25px;
-  color: #444;
+h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.alt {
-  background: #fafafa;
+/* ---------- Typewriter Cursor ---------- */
+.typewriter-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background-color: var(--accent);
+  margin-left: 6px;
+  animation: blink 0.8s infinite;
 }
 
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
-.skills li {
-  margin: 8px;
+/* ---------- Skills ---------- */
+.skill-bar-inner {
+  transition: width 1.2s ease-in-out;
+}
+
+/* ---------- Project Cards ---------- */
+.project-card {
+  background-color: #161b22;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.5);
+}
+
+/* ---------- Filters ---------- */
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--secondary);
   padding: 8px 16px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  font-size: 14px;
-  transition: 0.3s;
+  border-radius: 6px;
+  transition: all 0.25s ease;
 }
 
-.skills li:hover {
-  background: #222;
-  color: #fff;
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--accent);
+  color: var(--background);
+  border-color: var(--accent);
 }
 
-.project {
-  border-left: 3px solid #222;
-  padding-left: 15px;
-  margin-bottom: 25px;
+/* ---------- Modal ---------- */
+#project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 1000;
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  background: #f7f7f7;
-  font-size: 14px;
+#project-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+#project-modal {
+  background-color: #161b22;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+#project-modal-overlay.active #project-modal {
+  transform: scale(1);
+}
+
+/* ---------- Timeline ---------- */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: var(--border);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--background);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+}
+
+.timeline-item:hover .timeline-dot {
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* ---------- Forms ---------- */
+.form-input {
+  background-color: #010409;
+  border: 1px solid var(--border);
+  padding: 10px;
+  color: var(--primary);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.submit-btn {
+  background-color: var(--accent);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #79c0ff;
+  box-shadow: 0 0 10px #79c0ff;
+}
+
+/* ---------- Scroll Reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
